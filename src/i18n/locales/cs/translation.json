@@ -1,0 +1,19 @@
+{
+  "welcome": "Vítejte",
+  "promo": "Akce",
+  "viewProduct": "Zobrazit produkt",
+  "menu": {
+    "catalog": "Katalog",
+    "about": "O nás",
+    "payment": "Platba",
+    "delivery": "Doprava a montáž",
+    "reviews": "Recenze",
+    "blog": "Blog",
+    "contacts": "Kontakt",
+    "login": "Přihlásit se",
+    "logout": "Odhlásit se",
+    "profile": "Můj účet",
+    "wishlist": "Oblíbené",
+    "cart": "Košík"
+  }
+}

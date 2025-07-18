@@ -1,5 +1,19 @@
 {
   "welcome": "Welcome",
   "promo": "Promo",
-  "viewProduct": "View product"
+  "viewProduct": "View product",
+  "menu": {
+    "catalog": "Catalog",
+    "about": "About Us",
+    "payment": "Payment",
+    "delivery": "Delivery & Assembly",
+    "reviews": "Reviews",
+    "blog": "Blog",
+    "contacts": "Contacts",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "My Account",
+    "wishlist": "Wishlist",
+    "cart": "Cart"
+  }
 }

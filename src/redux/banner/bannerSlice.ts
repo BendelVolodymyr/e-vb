@@ -4,14 +4,14 @@ import { fetchBanners } from './operations';
 export interface Banner {
   _id: string;
   title: {
-    ua: string;
+    uk: string;
     en: string;
-    cz: string;
+    cs: string;
   };
   description: {
-    ua: string;
+    uk: string;
     en: string;
-    cz: string;
+    cs: string;
   };
   urlImg: string;
   link: string;

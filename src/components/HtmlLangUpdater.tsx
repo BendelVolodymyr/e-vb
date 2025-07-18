@@ -8,7 +8,7 @@ const HtmlLangUpdater = () => {
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
 
-  return null; // нічого не рендерить
+  return null;
 };
 
 export default HtmlLangUpdater;

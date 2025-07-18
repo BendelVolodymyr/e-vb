@@ -1,1 +1,1 @@
-export type TLanguage = 'ua' | 'en' | 'cz';
+export type TLanguage = 'uk' | 'en' | 'cs';

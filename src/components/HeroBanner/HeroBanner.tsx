@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import {
@@ -14,15 +13,17 @@ import {
 } from './HeroBanner.styled';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { useCurrentLanguage } from '../../hooks/useCurrentLanguage';
 import { fetchBanners } from '../../redux/banner/operations';
 import { selectBanners, selectIsLoading } from '../../redux/banner/selectors';
+import { useTranslation } from 'react-i18next';
 
 export const HeroBanner = () => {
   const dispatch = useAppDispatch();
   const banners = useAppSelector(selectBanners);
   const loading = useAppSelector(selectIsLoading);
-  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [index, setIndex] = useState(0);
 
@@ -37,7 +38,7 @@ export const HeroBanner = () => {
     return () => clearInterval(interval);
   }, [banners.length]);
 
-  const lang = i18n.language as 'ua' | 'en' | 'cz';
+  const lang = useCurrentLanguage();
 
   const next = () => setIndex(prev => (prev + 1) % banners.length);
   const prev = () =>

@@ -13,6 +13,8 @@ export const GlobalStyle = createGlobalStyle`
     color: #333;
     height: 100%;
     width: 100%;
+    
+    background-color: ${({ theme }) => theme.colors.background};
   }
 
   a {
@@ -28,4 +30,11 @@ export const GlobalStyle = createGlobalStyle`
   h1, h2, h3 {
     font-weight: 600;
   }
+
+  ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 `;

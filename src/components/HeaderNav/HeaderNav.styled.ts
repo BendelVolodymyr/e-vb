@@ -1,11 +1,19 @@
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { Link } from 'react-router-dom';
+import { ReactComponent as RightIcon } from '../../assets/svg/Right.svg';
+import { ReactComponent as CartIcon } from '../../assets/svg/cart.svg';
+import { ReactComponent as SearchIcon } from '../../assets/svg/search.svg';
 
 export const Header = styled.header`
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const HeaderBot = styled.div``;
+export const HeaderBot = styled.div`
+  position: relative;
+`;
 
 export const HeaderTop = styled.div`
   width: 100%;
@@ -23,19 +31,25 @@ export const WrapperHelper = styled.div``;
 
 export const WrapperLanguage = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 5px;
+`;
+
+export const Flag = styled.span`
+  align-items: end;
 `;
 
 export const Select = styled.select`
+  height: 30px;
+  font-size: 20px;
+
   color: ${({ theme }) => theme.colors.background};
-  font-size: 10px;
+
   background: no-repeat;
-  border: none;
-
   opacity: 0.6;
-
+  border: none;
   option {
     color: ${({ theme }) => theme.colors.background};
     font-size: 10px;
@@ -65,7 +79,7 @@ export const ButtonBurger = styled.button<{ $isOpen: boolean }>`
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,27 +119,119 @@ export const ButtonBurger = styled.button<{ $isOpen: boolean }>`
   }
 `;
 
-export const NavMenu = styled.nav<{ $isOpen: boolean }>`
-  /* display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')}; */
+export const SearchCartBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #000;
+`;
+
+export const SearchWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const SearchInput = styled.input<{ $visible: boolean }>`
+  width: ${({ $visible }) => ($visible ? '100px' : '0')};
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  padding: ${({ $visible }) => ($visible ? '6px 12px 6px 12px' : '6px 0')};
+  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   position: absolute;
-  top: 0;
+  right: 28px;
+  background-color: #fff;
+  pointer-events: ${({ $visible }) => ($visible ? 'auto' : 'none')};
+  z-index: 1;
+`;
+
+export const StyledSearchIcon = styled(SearchIcon)`
+  cursor: pointer;
+  color: #555;
+  position: relative;
+  z-index: 2;
+`;
+
+export const CartLLink = styled(Link)``;
+
+export const StyledCartIcon = styled(CartIcon)``;
+
+// export const NavMenu = styled.nav<{ $isOpen: boolean }>`
+//   position: absolute;
+//   top: 30px;
+//   left: 0;
+//   width: 100%;
+//   max-height: 100dvh;
+//   padding: 4px 16px;
+
+//   background-color: ${({ theme }) => theme.colors.background};
+//   z-index: 9;
+
+//   transform: ${({ $isOpen }) =>
+//     $isOpen ? 'translateX(0)' : 'translateX(-100%)'};
+//   transition: transform 0.3s ease-in-out;
+
+//   overflow-y: auto;
+
+//   @supports (height: 100dvh) {
+//     height: 100dvh;
+//   }
+
+//   @media screen and (min-width: 992px) {
+//     display: none;
+//   }
+// `;
+
+export const NavMenu = styled.nav<{ $isOpen: boolean }>`
+  position: fixed;
+  top: 54px;
   left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: #fff; ///отім через пропс
-  z-index: 9;
+  max-height: calc(100dvh - 54px);
+  background-color: ${({ theme }) => theme.colors.background};
+  z-index: 999;
+  padding: 16px;
 
   transform: ${({ $isOpen }) =>
     $isOpen ? 'translateX(0)' : 'translateX(-100%)'};
   transition: transform 0.3s ease-in-out;
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
-  }
+  overflow-y: auto;
 
   @media screen and (min-width: 992px) {
     display: none;
   }
 `;
 
-export const ListMenu = styled.ul``;
+export const WrapperListMenu = styled.ul`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const ListMenu = styled.li`
+  padding: 30px 10px 10px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  border-radius: 13px;
+  border: 1px solid #d6d6d6;
+
+  background: linear-gradient(88deg, #fff 1.69%, #d6d6d6 100%);
+`;
+
+export const StyledLink = styled(Link)`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const StyledRightIcon = styled(RightIcon)``;
