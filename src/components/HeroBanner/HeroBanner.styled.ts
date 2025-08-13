@@ -71,3 +71,14 @@ export const Arrows = styled.div`
     }
   }
 `;
+
+export const ProgressBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  border-radius: 2px;
+`;

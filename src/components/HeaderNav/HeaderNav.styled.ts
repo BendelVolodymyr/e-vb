@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as RightIcon } from '../../assets/svg/Right.svg';
 import { ReactComponent as CartIcon } from '../../assets/svg/cart.svg';
 import { ReactComponent as SearchIcon } from '../../assets/svg/search.svg';
+import { ReactComponent as LogoIcon } from '../../assets/svg/genetic-data-svgrepo-com.svg';
 
 export const Header = styled.header`
   position: sticky;
@@ -119,13 +120,24 @@ export const ButtonBurger = styled.button<{ $isOpen: boolean }>`
   }
 `;
 
+export const LogoBox = styled.div`
+  position: absolute;
+  left: 47%;
+`;
+
+export const LogoLink = styled(Link)``;
+
+export const LogoSvg = styled(LogoIcon)`
+  width: 25px;
+  height: 25px;
+`;
+
 export const SearchCartBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  border: 1px solid #000;
 `;
 
 export const SearchWrapper = styled.div`
@@ -156,7 +168,25 @@ export const StyledSearchIcon = styled(SearchIcon)`
   z-index: 2;
 `;
 
-export const CartLLink = styled(Link)``;
+export const CartLink = styled(Link)``;
+
+export const CartInfo = styled.div`
+  position: absolute;
+  bottom: -2px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: small;
+  width: 20px;
+  height: 20px;
+
+  background-color: #ff7f7f;
+  border-radius: 50%;
+  z-index: 99999;
+`;
 
 export const StyledCartIcon = styled(CartIcon)``;
 
@@ -188,7 +218,7 @@ export const StyledCartIcon = styled(CartIcon)``;
 
 export const NavMenu = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
-  top: 54px;
+  top: 58px;
   left: 0;
   width: 100%;
   max-height: calc(100dvh - 54px);

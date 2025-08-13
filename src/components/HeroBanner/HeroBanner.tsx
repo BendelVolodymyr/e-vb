@@ -10,6 +10,7 @@ import {
   Subtitle,
   Button,
   Arrows,
+  ProgressBox,
 } from './HeroBanner.styled';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
@@ -26,17 +27,39 @@ export const HeroBanner = () => {
   const { t } = useTranslation();
 
   const [index, setIndex] = useState(0);
+  const [progress, setProgress] = useState(0); // від 0 до 100
+  const intervalTime = 5000; // 5 секунд
 
   useEffect(() => {
     dispatch(fetchBanners());
   }, [dispatch]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex(prev => (prev + 1) % banners.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [banners.length]);
+    if (!banners.length) return;
+
+    setProgress(0);
+    const stepTime = 50; // кожні 50 мс оновлювати
+    const step = (stepTime / intervalTime) * 100; // скільки % за 50мс
+
+    const progressTimer = setInterval(() => {
+      setProgress(prev => {
+        const nextProgress = prev + step;
+        if (nextProgress >= 100) {
+          setIndex(prevIndex => {
+            if (prevIndex + 1 >= banners.length) {
+              return 0;
+            }
+            return prevIndex + 1;
+          });
+
+          return 0; // обнулити і почати новий цикл
+        }
+        return nextProgress;
+      });
+    }, stepTime);
+
+    return () => clearInterval(progressTimer);
+  }, [banners.length, index]); // коли змінюється слайд або кількість слайдів
 
   const lang = useCurrentLanguage();
 
@@ -71,6 +94,7 @@ export const HeroBanner = () => {
         <button onClick={prev}>‹</button>
         <button onClick={next}>›</button>
       </Arrows>
+      <ProgressBox style={{ width: `${progress}%` }} />
     </BannerWrapper>
   );
 };

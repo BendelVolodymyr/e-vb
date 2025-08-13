@@ -19,10 +19,14 @@ import {
   StyledLink,
   SearchCartBox,
   SearchInput,
-  CartLLink,
+  CartLink,
   StyledCartIcon,
   SearchWrapper,
   StyledSearchIcon,
+  CartInfo,
+  LogoBox,
+  LogoLink,
+  LogoSvg,
 } from './HeaderNav.styled';
 
 interface MenuItem {
@@ -33,6 +37,7 @@ interface MenuItem {
 const HeaderNav = () => {
   const [burgerMenu, setBurgerMenu] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [localNumber, setLocalNumber] = useState(1);
 
   useEffect(() => {
     if (burgerMenu) {
@@ -230,6 +235,11 @@ const HeaderNav = () => {
           >
             <span></span>
           </ButtonBurger>
+          <LogoBox>
+            <LogoLink to="/">
+              <LogoSvg />
+            </LogoLink>
+          </LogoBox>
           <SearchCartBox>
             <SearchWrapper>
               <SearchInput
@@ -241,9 +251,10 @@ const HeaderNav = () => {
               />
               <StyledSearchIcon onClick={toggleSearch} />
             </SearchWrapper>
-            <CartLLink to="/cart">
+            <CartLink to="/cart">
               <StyledCartIcon />
-            </CartLLink>
+              <CartInfo>{localNumber > 9 ? '9+' : localNumber}</CartInfo>
+            </CartLink>
           </SearchCartBox>
         </WrapperMenu>
         <NavMenu $isOpen={burgerMenu}>
