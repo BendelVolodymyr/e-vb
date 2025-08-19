@@ -15,5 +15,10 @@
     "profile": "My Account",
     "wishlist": "Wishlist",
     "cart": "Cart"
+  },
+  "promoBanner": {
+    "title": "Weekly Deals",
+    "endsIn": "Ends in",
+    "endsAt": "Ends at"
   }
 }

@@ -8,11 +8,11 @@ export const Layout = () => {
     <>
       <HtmlLangUpdater />
       <HeaderNav />
-      <section>
+      <main>
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
-      </section>
+      </main>
     </>
   );
 };

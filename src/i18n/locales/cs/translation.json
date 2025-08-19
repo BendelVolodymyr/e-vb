@@ -15,5 +15,10 @@
     "profile": "Můj účet",
     "wishlist": "Oblíbené",
     "cart": "Košík"
+  },
+  "promoBanner": {
+    "title": "Týdenní akce",
+    "endsIn": "Končí za",
+    "endsAt": "Konec akce"
   }
 }

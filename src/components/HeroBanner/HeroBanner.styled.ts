@@ -1,13 +1,30 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { BannerWrapperProps } from '../../types/heroBanner';
 
-export const BannerWrapper = styled.div`
+export const BannerFirsWrapper = styled.section`
+  padding: 4px 16px;
+`;
+
+export const BannerWrapper = styled(motion.div)<BannerWrapperProps>`
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15fr 1fr;
+  grid-column-gap: 5px;
+  grid-row-gap: px;
   height: 400px;
+  margin-bottom: 2rem;
+
+  background-image: url(${props => props.$bgUrl});
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+
   border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 2rem;
+
+  transition: background-image 1s ease-in-out;
 `;
 
 export const Overlay = styled.div`
@@ -51,14 +68,16 @@ export const Button = styled.button`
 
 export const Arrows = styled.div`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  width: 100%;
+  height: 100%;
+
   z-index: 3;
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
 
   button {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     font-size: 1.5rem;
     padding: 0.4rem 0.8rem;
@@ -72,13 +91,40 @@ export const Arrows = styled.div`
   }
 `;
 
-export const ProgressBox = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.3);
+export const ProgressWrapper = styled.div`
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ProgressBox = styled.div<{
+  $active?: boolean;
+}>`
+  max-width: 100px;
+  flex: 1;
+  background-color: #eeeeee27;
+  position: relative;
   overflow: hidden;
-  border-radius: 2px;
+  height: 6px;
+
+  border-radius: 5px;
+  z-index: 4;
+  cursor: ${props => (props.$active ? 'not-allowed' : 'pointer')};
+
+  &:focus {
+    outline: 2px solid #4caf50;
+  }
+`;
+
+export const ProgressFill = styled.div<{ $progress: number }>`
+  width: ${props => props.$progress}%;
+  height: 100%;
+  height: 100%;
+  background-color: #cff3d0ff;
+  transition: width 0.08s linear;
+
+  border-radius: 5px;
 `;

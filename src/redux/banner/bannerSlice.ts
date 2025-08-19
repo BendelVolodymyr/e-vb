@@ -1,42 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchBanners } from './operations';
-
-export interface Banner {
-  _id: string;
-  title: {
-    uk: string;
-    en: string;
-    cs: string;
-  };
-  description: {
-    uk: string;
-    en: string;
-    cs: string;
-  };
-  urlImg: string;
-  link: string;
-  startDate: string;
-  endDate: string;
-  isActive: boolean;
-  displayOrder: number;
-  type: string;
-}
-
-interface BannerState {
-  items: Banner[];
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: BannerState = {
-  items: [],
-  loading: false,
-  error: null,
-};
+import { initialStateBanner } from '../../types/heroBanner';
 
 const bannerSlice = createSlice({
   name: 'banner',
-  initialState,
+  initialState: initialStateBanner,
   reducers: {},
   extraReducers: builder => {
     builder

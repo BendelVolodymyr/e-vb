@@ -11,6 +11,9 @@ import {
   Button,
   Arrows,
   ProgressBox,
+  BannerFirsWrapper,
+  ProgressFill,
+  ProgressWrapper,
 } from './HeroBanner.styled';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
@@ -26,13 +29,14 @@ export const HeroBanner = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [index, setIndex] = useState(0);
-  const [progress, setProgress] = useState(0); // від 0 до 100
+  const [index, setIndex] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0); // від 0 до 100
+
   const intervalTime = 5000; // 5 секунд
 
   useEffect(() => {
     dispatch(fetchBanners());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (!banners.length) return;
@@ -45,56 +49,67 @@ export const HeroBanner = () => {
       setProgress(prev => {
         const nextProgress = prev + step;
         if (nextProgress >= 100) {
-          setIndex(prevIndex => {
-            if (prevIndex + 1 >= banners.length) {
-              return 0;
-            }
-            return prevIndex + 1;
-          });
-
-          return 0; // обнулити і почати новий цикл
+          if (index + 1 >= banners.length) {
+            setIndex(0);
+          } else {
+            setIndex(index + 1);
+          }
+          return 0;
         }
         return nextProgress;
       });
     }, stepTime);
 
     return () => clearInterval(progressTimer);
-  }, [banners.length, index]); // коли змінюється слайд або кількість слайдів
+  }, [banners.length, index]);
 
   const lang = useCurrentLanguage();
-
-  const next = () => setIndex(prev => (prev + 1) % banners.length);
-  const prev = () =>
-    setIndex(prev => (prev - 1 + banners.length) % banners.length);
 
   if (loading || !banners.length) return null;
 
   const current = banners[index];
 
   return (
-    <BannerWrapper style={{ backgroundImage: `url(${current.urlImg})` }}>
-      <Overlay />
-      <AnimatePresence mode="wait">
-        <Content
-          key={current._id}
-          as={motion.div}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.7, ease: [0.85, 0.008, 0.094, 0.988] }}
-        >
-          <Title>{current.title[lang]}</Title>
-          <Subtitle>{current.description[lang]}</Subtitle>
-          <Button onClick={() => navigate(current.link)}>
-            {t('viewProduct')}
-          </Button>
-        </Content>
-      </AnimatePresence>
-      <Arrows>
-        <button onClick={prev}>‹</button>
-        <button onClick={next}>›</button>
-      </Arrows>
-      <ProgressBox style={{ width: `${progress}%` }} />
-    </BannerWrapper>
+    <BannerFirsWrapper>
+      <BannerWrapper $bgUrl={current.urlImg}>
+        <Overlay />
+        <AnimatePresence mode="wait">
+          <Content
+            key={current._id}
+            as={motion.div}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.7, ease: [0.85, 0.008, 0.094, 0.988] }}
+          >
+            <Title>{current.title[lang]}</Title>
+            <Subtitle>{current.description[lang]}</Subtitle>
+            <Button onClick={() => navigate(current.link)}>
+              {t('viewProduct')}
+            </Button>
+          </Content>
+        </AnimatePresence>
+        <ProgressWrapper>
+          {!loading &&
+            banners.length > 0 &&
+            banners.map((banner, i) => (
+              <ProgressBox
+                key={banner._id}
+                tabIndex={0}
+                $active={i === index}
+                onClick={() => setIndex(i)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIndex(i);
+                  }
+                }}
+              >
+                <ProgressFill $progress={i === index ? progress : 0} />
+              </ProgressBox>
+            ))}
+        </ProgressWrapper>
+      </BannerWrapper>
+    </BannerFirsWrapper>
   );
 };

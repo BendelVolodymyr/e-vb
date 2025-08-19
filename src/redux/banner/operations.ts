@@ -1,14 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { Banner } from './bannerSlice';
+import { BannerResponse } from '../../types/heroBanner';
+import { api } from '../../api/axios';
 
-axios.defaults.baseURL = 'http://localhost:3001/api';
-
-export const fetchBanners = createAsyncThunk<Banner[]>(
+export const fetchBanners = createAsyncThunk<BannerResponse[]>(
   'banner/fetchBanners',
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get<Banner[]>('/banners'); // ✅ без /api
+      const res = await api.get<BannerResponse[]>('/banners');
       return res.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
